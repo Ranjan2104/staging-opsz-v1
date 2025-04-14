@@ -1,0 +1,26 @@
+import React from 'react';
+import { Box, ThemeProvider, createTheme } from '@mui/material';
+import ProductHero from '../Components/Product Components/ProductHero';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Montserrat, sans-serif",
+  },
+});
+
+const ProductPage = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Box
+        sx={{
+          background: 'linear-gradient(to right, #2D0052, #7A1FA2, #1A0033)',
+          minHeight: '100vh',
+        }}
+      >
+        <ProductHero />
+      </Box>
+    </ThemeProvider>
+  );
+};
+
+export default ProductPage;
