@@ -6,6 +6,7 @@ import {
   Link,
   Link as MuiLink,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import XIcon from "@mui/icons-material/X";
@@ -27,6 +28,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const isMobile = useMediaQuery("(max-width:600px)");
   const handleSubmit = async () => {
     if (!email) {
       toast.error("Please enter an email");
@@ -215,7 +217,7 @@ const Footer = () => {
                 }}
               >
                 By Submitting you agree our{" "}
-                <MuiLink href="/privacy-policy">Privacy Policy</MuiLink>
+                <MuiLink href="/privacy-policy" sx={{ color: 'white', textDecoration: 'underline' }}>Privacy Policy</MuiLink>
               </Typography>
               <Box
                 sx={{
@@ -232,7 +234,7 @@ const Footer = () => {
                   underline="none"
                   sx={iconStyle}
                 >
-                  <LinkedInIcon />
+                  <LinkedInIcon sx={{ color: isMobile ? "#800080" : 'unset' }} />
                 </Link>
 
                 <Link
@@ -242,7 +244,7 @@ const Footer = () => {
                   underline="none"
                   sx={iconStyle}
                 >
-                  <XIcon />
+                  <XIcon sx={{ color: isMobile ? "#800080" : 'unset' }} />
                 </Link>
 
                 <Link
@@ -252,7 +254,7 @@ const Footer = () => {
                   underline="none"
                   sx={iconStyle}
                 >
-                  <EmailIcon />
+                  <EmailIcon sx={{ color: isMobile ? "#800080" : 'unset' }} />
                 </Link>
               </Box>
             </Box>

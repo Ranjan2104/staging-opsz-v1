@@ -53,7 +53,7 @@ export const carouselItems = [
     before_OpsZ: {
       title: "Before OpsZ: A Day in the Life",
       description: [
-        "Troubleshooting failed Jenkins pipeline",
+        "Troubleshooting a failed Jenkins pipeline by checking build logs",
         "Logs into GitLab, then AWS Console, then Terraform",
         "Coordination delays with SRE over resource access",
         "Manual rollback of bad deployment",
@@ -92,7 +92,7 @@ export const carouselItems = [
     before_OpsZ: {
       title: "Before OpsZ: A Day in the Life",
       description: [
-        "Checks health on Oracle, then MongoDB, then RDS",
+        "Checks health on Oracle, then MongoDB, then RDS — 3 different tools to check",
         "Performs manual backup across environments",
         "Starts security patching — tedious, needs approvals",
         "Handles performance issue flagged by DevOps",
@@ -130,7 +130,7 @@ export const carouselItems = [
     before_OpsZ: {  
       title: "Before OpsZ: A Day in the Life",
       description: [
-        "Escalates incident to IT via email, waits for reply",
+        "Escalates incident to IT via email, waits for reply → no resolution yet",
         "No visibility on root cause → escalates again",
         "Customer angry → no clear ETA",
         "Update comes in Slack — too late, resolution unclear",
@@ -166,7 +166,7 @@ export const carouselItems = [
     before_OpsZ: {
       title: "Before OpsZ: A Day in the Life",
       description: [
-        "Pressed on outages and IT spend in exec sync",
+        "Pressed on outages and IT spend in exec sync meeting → no visibility",
         "Delayed, fragmented incident reports",
         "Chasing cloud costs and compliance gaps",
         "Reactive work consumes 40% of team time",
@@ -198,7 +198,7 @@ export const carouselItems = [
 
 // this is for footer links for sub sections
 export const navigationLinks = [
-  { name: "Back to Top", href: "/", ariaLabel: "Navigate to top of page" },
+  { name: "Back to Top", href: "#top", ariaLabel: "Navigate to top of page" },
   {
     name: "The Product",
     href: "/product",

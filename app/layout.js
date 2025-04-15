@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "./LayoutWrapper";
+import ChatbotScript from "./Components/ChatbotScript";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,16 +34,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
         className={`${montserrat.variable} ${geistSans.variable} ${geistMono.variable}`}
+        id="top"
       >
         <LayoutWrapper>{children}</LayoutWrapper>
-        <script
-          defer
-          type="text/javascript"
-          id="chatbot-initials-script"
-          src="https://chat-bbl.noform.ai/script-chatbot.js"
-          data-server-url="https://app.noform.ai"
-          data-bot-id="67eab192038da2eaa2d2fea5"
-        ></script>
+        <ChatbotScript /> 
       </body>
     </html>
   );

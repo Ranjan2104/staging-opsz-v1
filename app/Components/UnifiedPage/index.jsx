@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -8,26 +8,96 @@ import {
 } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useInView } from "react-intersection-observer";
+import { motion, AnimatePresence } from "framer-motion";
 import "animate.css";
 
 const UnifiedPage = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
-
+  const [componentRef, componentInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.3,
+  });
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
 
-  const [imageKey, setImageKey] = useState(0);
   const [index, setIndex] = useState(0);
+  const intervalRef = useRef(null);
 
-  const handleButtonClick = (index) => {
-    setImageKey((prev) => prev + 1);
-    setIndex(index);
+  const contentItems = [
+    {
+      title: "Connect Everything, Control Anything.",
+      image: "/unified/DashboardImage.svg",
+    },
+    {
+      title: "Automate Anything, Orchestrate Everything.",
+      image: "/automate.svg",
+    },
+    {
+      title: "Amplify Growth, Simplify Control.",
+      image: "/unify.svg",
+    },
+  ];
+
+  // Animation variants
+  const imageAnimation = {
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } },
   };
+
+  const titleAnimation = {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    exit: { opacity: 0, transition: { duration: 0.2 } },
+  };
+
+  // Start auto-rotation only when component is in view
+  useEffect(() => {
+    if (componentInView && !intervalRef.current) {
+      intervalRef.current = setInterval(() => {
+        setIndex((prevIndex) => (prevIndex + 1) % 3);
+      }, 3000);
+    } else if (!componentInView && intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [componentInView]);
+
+  const handleButtonClick = (idx) => {
+    if (idx === index) return; // Avoid unnecessary updates
+
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
+    setIndex(idx);
+
+    // Restart auto-rotation
+    intervalRef.current = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % 3);
+    }, 3000);
+  };
+
+  // Button definitions for consistency with active states
+  const buttons = [
+    { label: "UNIFY", icon: "/unified/Unify Icon.svg", color: "#80FF91" },
+    { label: "AUTOMATE", icon: "/unified/Robot.svg", color: "#C57AFF" },
+    { label: "SCALE", icon: "/unified/Scale.svg", color: "#9CCAFF" },
+  ];
 
   return (
     <Box
+      ref={componentRef}
       sx={{
         position: "relative",
         padding: { xs: "20px", sm: "25px", md: "30px" },
@@ -151,13 +221,15 @@ const UnifiedPage = () => {
             display: "flex",
             flexDirection: { xs: "column", sm: "row" },
             mb: isMobile ? 2 : 4,
-            maxWidth: { xs: "100%", sm: "100%", md: "70%", lg: "100%" },
+            maxWidth: { xs: "100%", sm: "100%", md: "80%" },
             gap: { xs: 2, sm: 0 },
+            color: "#B4B4B4",
+            fontSize: "12px",
           }}
           ref={ref}
         >
           <Box sx={{ width: { xs: "100%", sm: "50%" }, pr: { xs: 0, sm: 2 } }}>
-            <Typography sx={{ fontSize: "15px", color: "white" }}>
+            <Typography>
               OpsZ unifies your entire IT ecosystem: on-prem, cloud, hybrid, or
               legacy, into one intelligent platform. By integrating seamlessly
               with existing tools, OpsZ eliminates silos, streamlines workflows,
@@ -167,7 +239,7 @@ const UnifiedPage = () => {
             </Typography>
           </Box>
           <Box sx={{ width: { xs: "100%", sm: "50%" }, pl: { xs: 0, sm: 2 } }}>
-            <Typography sx={{ fontSize: "15px", color: "white" }}>
+            <Typography>
               OpsZ enables effortless scale by abstracting complexity and
               standardizing operations across teams, tools, and environments.
               Whether you're managing hundreds or millions of events, OpsZ
@@ -181,124 +253,179 @@ const UnifiedPage = () => {
         {/* Feature Buttons */}
         <Box
           sx={{
-            backgroundImage: "url(/unified/Baseplate.svg)",
+            backgroundImage: {
+              xs: "none", // Remove baseplate on mobile
+              sm: "url(/unified/Baseplate.svg)"
+            },
+            backgroundColor: { 
+              xs: "rgba(15, 15, 22, 0.7)", // Dark background on mobile instead
+              sm: "transparent" 
+            },
             backgroundSize: {
-              xs: "250% 250%",
               sm: "220% 220%",
               md: "200% 200%",
             },
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             borderRadius: "10px",
-            padding: "6px 10px",
+            padding: { xs: "12px 10px", sm: "8px 15px" },
             display: "flex",
             flexDirection: { xs: "column", sm: "row" },
-            gap: isMobile ? 3 : 5,
+            gap: { xs: 2, sm: 3, md: 5 },
             mb: { xs: 3, sm: 2, md: 1 },
-            maxWidth: "fit-content",
-            justifyContent: "space-around",
+            width: { xs: "100%", sm: "auto" },
+            maxWidth: { xs: "100%", sm: "fit-content" },
+            justifyContent: "center",
             alignItems: "center",
+            boxShadow: { 
+              xs: "0 4px 15px rgba(0,0,0,0.3)", // Stronger shadow for mobile
+              sm: "0 4px 20px rgba(0,0,0,0.2)" 
+            },
+            border: { 
+              xs: "1px solid rgba(120, 120, 150, 0.2)", // Subtle border for mobile
+              sm: "none" 
+            }
           }}
         >
-          {/* Buttons with onClick */}
-          {[
-            {
-              label: "UNIFY",
-              icon: "/unified/Unify Icon.svg",
-              color: "#80FF91",
-            },
-            { label: "AUTOMATE", icon: "/unified/Robot.svg", color: "#C57AFF" },
-            { label: "SCALE", icon: "/unified/Scale.svg", color: "#9CCAFF" },
-          ].map((btn, idx) => (
-            <Button
-              key={idx}
-              onClick={() => handleButtonClick(idx)}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: { xs: "10px 15px", md: "8px 12px" },
-                width: "225px",
-                borderRadius: "6px",
-                color: btn.color,
-                backgroundColor: isMobile ? "black" : "transparent",
-                cursor: "pointer",
-                transition: "all 0.3s",
-                boxShadow: `0 0 10px 2px ${btn.color}50`,
-                textTransform: "none",
-                fontFamily: "Montserrat, sans-serif",
-                "&:hover": {
-                  backgroundColor: `${btn.color}0D`,
-                  boxShadow: `0 0 15px 5px ${btn.color}80`,
-                },
-              }}
-            >
-              <Box
-                component="img"
-                src={btn.icon}
-                alt={`${btn.label} Icon`}
+          {/* Buttons with onClick and active status */}
+          {buttons.map((btn, idx) => {
+            const isActive = idx === index;
+
+            return (
+              <Button
+                key={idx}
+                onClick={() => handleButtonClick(idx)}
                 sx={{
-                  width: { xs: 16, md: 20 },
-                  height: { xs: 16, md: 20 },
-                  marginRight: 3,
-                  border: `1px solid ${btn.color}`,
-                  borderRadius: "1px",
-                  padding: "2px",
-                }}
-              />
-              <Typography
-                sx={{
-                  fontWeight: "medium",
-                  marginRight: 3,
-                  fontSize: { xs: "13px", md: "14px" },
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: { xs: "12px 15px", md: "8px 12px" },
+                  width: { xs: "100%", sm: "auto", md: "225px" },
+                  maxWidth: { xs: "100%", sm: "225px" },
+                  borderRadius: { xs: "8px", sm: "6px" },
+                  color: isActive ? btn.color : "#545F71",
+                  backgroundColor: { 
+                    xs: isActive ? "rgba(30, 30, 40, 0.9)" : "rgba(15, 15, 22, 0.85)",
+                    sm: "transparent" 
+                  },
+                  cursor: "pointer",
+                  transition: "all 0.3s",
+                  boxShadow: isActive 
+                    ? `0 0 10px 2px ${btn.color}50` 
+                    : "none",
+                  textTransform: "none",
+                  fontFamily: "Montserrat, sans-serif",
+                  opacity: isActive ? 1 : 0.7,
+                  border: { 
+                    xs: `1px solid ${isActive ? btn.color : "rgba(84,95,113,0.3)"}`, 
+                    sm: "none" 
+                  },
+                  "&:hover": {
+                    backgroundColor: {
+                      xs: isActive ? "rgba(30, 30, 40, 0.9)" : "rgba(25, 25, 35, 0.85)",
+                      sm: `${btn.color}0D`
+                    },
+                    boxShadow: `0 0 15px 5px ${btn.color}80`,
+                    opacity: 0.9,
+                    border: { 
+                      xs: `1px solid ${btn.color}`, 
+                      sm: "none" 
+                    },
+                  },
                 }}
               >
-                {btn.label}
-              </Typography>
-              <ChevronRightIcon sx={{ fontSize: { xs: 18, md: 24 } }} />
-            </Button>
-          ))}
+                <Box
+                  component="img"
+                  src={btn.icon}
+                  alt={`${btn.label} Icon`}
+                  sx={{
+                    width: { xs: 20, md: 20 },
+                    height: { xs: 20, md: 20 },
+                    marginRight: { xs: 2, md: 3 },
+                    border: `1px solid ${isActive ? btn.color : "#545F71"}`,
+                    borderRadius: "1px",
+                    padding: "2px",
+                    opacity: isActive ? 1 : 0.4,
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontWeight: isActive ? "600" : "400",
+                    fontSize: { xs: "14px", md: "14px" },
+                    flexGrow: 1,
+                    textAlign: "left",
+                    marginLeft: { xs: 1, md: 0 },
+                  }}
+                >
+                  {btn.label}
+                </Typography>
+                <ChevronRightIcon 
+                  sx={{ 
+                    fontSize: { xs: 20, md: 24 },
+                    marginLeft: { xs: 1, md: 0 },
+                  }} 
+                />
+              </Button>
+            );
+          })}
         </Box>
-        <Box>
-          <h2
-            style={{
-              background: "linear-gradient(90deg, #FFFFFF, #805AD5)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
+
+        {/* Title & Image with Framer Motion animations */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`title-${index}`}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={titleAnimation}
           >
-            {index === 0
-              ? "Connect Everything, Control Anything."
-              : index === 1
-              ? "Automate Anything, Orchestrate Everything."
-              : "Amplify Growth, Simplify Control."}
-          </h2>
-        </Box>
+            <h2
+              style={{
+                background: "linear-gradient(90deg, #FFFFFF, #805AD5)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                margin: "0 0 16px 0",
+              }}
+            >
+              {contentItems[index].title}
+            </h2>
+          </motion.div>
+        </AnimatePresence>
+
         <Box
           sx={{
             display: "flex",
             justifyContent: "flex-start",
             width: { xs: "100%", md: "100vw" },
             overflow: "hidden",
+            position: "relative",
+            minHeight: { xs: "200px", md: "300px" },
           }}
         >
-          <Box
-            key={imageKey}
-            component="img"
-            src={
-              index === 0
-                ? "/unified/DashboardImage.svg"
-                : index === 1
-                ? "/automate.svg"
-                : "/unify.svg"
-            }
-            alt="Dashboard"
-            className="animate__animated animate__fadeInUp"
-            sx={{
-              maxWidth: isMobile ? "100%" : "90%",
-              height: "auto",
-            }}
-          />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`image-${index}`}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={imageAnimation}
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+            >
+              <Box
+                component="img"
+                src={contentItems[index].image}
+                alt="Dashboard"
+                sx={{
+                  maxWidth: isMobile ? "100%" : "90%",
+                  height: "auto",
+                }}
+              />
+            </motion.div>
+          </AnimatePresence>
         </Box>
       </Container>
     </Box>

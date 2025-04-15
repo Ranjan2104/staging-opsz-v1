@@ -68,7 +68,7 @@ function Navbar() {
           }}
           onClick={() => handleRedirect("/")}
         >
-          <img src="/NavLogo.svg" alt="nav-logo" />
+          <img src="/NavLogo.svg" alt="nav-logo" fetchPriority="high" />
         </Box>
 
         <Box
@@ -108,7 +108,7 @@ function Navbar() {
               textTransform: "none",
               cursor: "pointer",
             }}
-            onClick={() => handleRedirect("/chatbot")}
+            onClick={() => (window.location.href = "/chatbot")}
           >
             Schedule a Briefing
           </Button>
@@ -141,22 +141,28 @@ function Navbar() {
             transform: isMenuOpen ? "translateY(0)" : "translateY(-100%)",
             opacity: isMenuOpen ? 1 : 0,
             transition: "transform 1s ease-in-out, opacity 1s ease-in-out",
-            flexDirection: "column",
-            gap: "1.5rem",
             zIndex: 100,
             paddingTop: "1.5rem",
             pointerEvents: isMenuOpen ? "auto" : "none",
           }}
         >
-          {NavLink.map((item) => (
-            <Typography
-              key={item.name}
-              sx={{ color: "#EFEFEF", cursor: "pointer" }}
-              onClick={() => handleCloseNavMenu(item.url)}
-            >
-              {item.name}
-            </Typography>
-          ))}
+          <Box
+            sx={{
+              display: { xs: "flex", md: "none" },
+              gap: "1rem",
+              flexDirection: "column",
+            }}
+          >
+            {NavLink.map((item) => (
+              <Typography
+                key={item.name}
+                sx={{ color: "#EFEFEF", cursor: "pointer", fontSize: "18px" }}
+                onClick={() => handleCloseNavMenu(item.url)}
+              >
+                {item.name}
+              </Typography>
+            ))}
+          </Box>
 
           <Button
             variant="contained"

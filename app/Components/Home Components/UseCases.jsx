@@ -79,6 +79,8 @@ export default function UseCaseSection() {
   const settings = {
     dots: true,
     infinite: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -339,6 +341,7 @@ export default function UseCaseSection() {
                                 flexDirection: "row",
                                 alignItems: "flex-start",
                                 gap: 2.5,
+                                // height: isMobile ? '550px' : '404px',
                               }}
                             >
                               <Box sx={{ flex: 1 }}>

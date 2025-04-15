@@ -1,17 +1,28 @@
 "use client";
+
+import React, { lazy, Suspense } from "react";
 import ProductPage from "../Pages/ProductPage";
-import React from "react";
-import Visibility from "./visibility";
-import ProductSecurity from "../Components/ProductSecurity";
-import ProductSaving from "../Components/ProductSaving";
+
+const Visibility = lazy(() => import("./visibility"));
+const ProductSecurity = lazy(() => import("../Components/ProductSecurity"));
+const ProductSaving = lazy(() => import("../Components/ProductSaving"));
 
 export default function Product() {
   return (
     <div>
       <ProductPage />
-      <ProductSecurity />
-      <Visibility />
-      <ProductSaving />
+
+      <Suspense fallback={<div>Loading Security...</div>}>
+        <ProductSecurity />
+      </Suspense>
+
+      <Suspense fallback={<div>Loading Visibility...</div>}>
+        <Visibility />
+      </Suspense>
+
+      <Suspense fallback={<div>Loading Savings...</div>}>
+        <ProductSaving />
+      </Suspense>
     </div>
   );
 }

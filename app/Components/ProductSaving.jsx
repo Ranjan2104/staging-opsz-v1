@@ -2,6 +2,28 @@
 import React from "react";
 import { Box, Typography, Container, useMediaQuery, Link } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
+// Text comes in from the left
+const fadeInFromLeft = {
+  hidden: { opacity: 0, x: -50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+// Cards scale in
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
 
 const ProductSaving = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
@@ -9,22 +31,25 @@ const ProductSaving = () => {
     {
       icon: "/sub-1.svg",
       title: "Unified Command Center",
-      description:
-        "Real-time, cross-cloud visibility from a single pane of glass.",
+      description: "Real-time, cross-cloud visibility from a single pane of glass.",
     },
     {
       icon: "/sub-2.svg",
       title: "Adaptive Automation",
-      description:
-        "Workflow engine that learns, orchestrates, and responds intelligently.",
+      description: "Workflow engine that learns, orchestrates, and responds intelligently.",
     },
     {
       icon: "/sub-3.svg",
       title: "Scalable Ops Intelligence",
-      description:
-        "Agent-based architecture that functions from edge to cloud.",
+      description: "Agent-based architecture that functions from edge to cloud.",
     },
   ];
+
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
     <Container maxWidth={false} disableGutters>
       <Box
@@ -48,8 +73,10 @@ const ProductSaving = () => {
             objectPosition: "center",
             zIndex: 0,
             transform: "scaleX(-1)",
+            filter: isMobile ? "brightness(0.4)" : "brightness(0.9)",
           }}
         />
+
         <Box
           sx={{
             position: "relative",
@@ -62,8 +89,13 @@ const ProductSaving = () => {
             paddingTop: { xs: "1rem", sm: "1rem", md: "2rem" },
           }}
         >
-          <Box sx={{ paddingLeft: "64px" }}>
-            <Box>
+          <Box sx={{ paddingLeft: isMobile ? "32px" : "64px" }}>
+            <motion.div
+              variants={fadeInFromLeft}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              ref={ref}
+            >
               <Typography
                 variant="h1"
                 sx={{
@@ -82,20 +114,28 @@ const ProductSaving = () => {
               >
                 OpsZ Automates
               </Typography>
-            </Box>
-            <Box
-              sx={{
-                color: "#90D3FF",
-                fontFamily: "Montserrat",
-                fontSize: "30px",
-                fontWeight: 700,
-                lineHeight: "1.2",
-                textTransform: "capitalize",
-              }}
+            </motion.div>
+
+            <motion.div
+              variants={fadeInFromLeft}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
             >
-              Up to 80% of Inefficiencies
-            </Box>
+              <Box
+                sx={{
+                  color: "#90D3FF",
+                  fontFamily: "Montserrat",
+                  fontSize: "30px",
+                  fontWeight: 700,
+                  lineHeight: "1.2",
+                  textTransform: "capitalize",
+                }}
+              >
+                Up to 80% of Inefficiencies
+              </Box>
+            </motion.div>
           </Box>
+
           <Box
             sx={{
               display: "flex",
@@ -114,71 +154,79 @@ const ProductSaving = () => {
               maxWidth: isMobile ? "unset" : "90%",
               overflowX: isMobile ? "unset" : "auto",
               width: isMobile ? "unset" : "calc(100% - 11.5rem)",
+              textAlign: "center",
             }}
           >
             {features.map((feature, index) => (
-              <Box
+              <motion.div
                 key={index}
-                sx={{
-                  flex: "1 1 30%",
-                  minWidth: "250px",
-                  maxWidth: "360px",
-                  color: "#EFEFEF",
-                  fontFamily: "Montserrat",
-                  textAlign: "center",
-                }}
+                variants={scaleIn}
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
               >
                 <Box
-                  component="img"
-                  src={feature.icon}
-                  alt={feature.title}
-                  sx={{ width: 48, height: 48, mb: 2 }}
-                />
-                <Typography
-                  variant="h6"
                   sx={{
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    textTransform: "capitalize",
-                    mb: 1,
+                    flex: "1 1 30%",
+                    minWidth: "250px",
+                    maxWidth: "360px",
+                    color: "#EFEFEF",
+                    fontFamily: "Montserrat",
+                    textAlign: "center",
                   }}
                 >
-                  {feature.title}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    color: "#D0D0D0",
-                    mb: 2,
-                  }}
-                >
-                  {feature.description}
-                </Typography>
-                <Link href="/chatbot">
+                  <Box
+                    component="img"
+                    src={feature.icon}
+                    alt={feature.title}
+                    sx={{ width: 48, height: 48, mb: 2 }}
+                  />
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontSize: "20px",
+                      fontWeight: 700,
+                      textTransform: "capitalize",
+                      mb: 1,
+                    }}
+                  >
+                    {feature.title}
+                  </Typography>
                   <Typography
                     variant="body2"
                     sx={{
-                      display: "inline-flex",
-                      alignItems: "center",
                       fontSize: "14px",
-                      fontWeight: 500,
-                      color: "#AAB4FF",
-                      cursor: "pointer",
-                      "&:hover": { textDecoration: "underline" },
+                      fontWeight: 400,
+                      color: "#D0D0D0",
+                      mb: 2,
                     }}
                   >
-                    Learn More
-                    <KeyboardArrowRightIcon
-                      sx={{ fontSize: "16px", ml: 0.5, mt: "1px" }}
-                    />
+                    {feature.description}
                   </Typography>
-                </Link>
-              </Box>
+                  <Link href="/chatbot">
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        fontSize: "14px",
+                        fontWeight: 500,
+                        color: "#AAB4FF",
+                        cursor: "pointer",
+                        "&:hover": { textDecoration: "underline" },
+                      }}
+                    >
+                      Learn More
+                      <KeyboardArrowRightIcon
+                        sx={{ fontSize: "16px", ml: 0.5, mt: "1px" }}
+                      />
+                    </Typography>
+                  </Link>
+                </Box>
+              </motion.div>
             ))}
           </Box>
         </Box>
+
         <Box
           sx={{
             position: "absolute",

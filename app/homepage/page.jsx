@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import HomeHero from "../Components/Home Components/HomeHero";
 import UnifiedPage from "../Components/UnifiedPage";
 import UseCaseSection from "../Components/Home Components/UseCases";
+import Features from "../product/features";
 
 const theme = createTheme({
   typography: {
@@ -23,6 +24,7 @@ const page = () => {
     <ThemeProvider theme={theme}>
       <HomeHero />
       <UnifiedPage />
+      <Features />
       <UseCaseSection />
     </ThemeProvider>
   );

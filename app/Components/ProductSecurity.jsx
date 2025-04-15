@@ -1,9 +1,36 @@
 'use client';
 import React from "react";
 import { Box, Typography, Container, useMediaQuery } from "@mui/material";
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
+
+const fadeInFromLeft = {
+  hidden: { opacity: 0, x: -200 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 1.2, ease: "easeOut" }
+  }
+};
+
+const MotionBox = motion(Box);
+const MotionTypography = motion(Typography);
 
 const ProductSecurity = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
+  const isTab = useMediaQuery("(max-width: 900px)");
+
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+
   return (
     <Container maxWidth={false} disableGutters>
       <Box
@@ -12,6 +39,7 @@ const ProductSecurity = () => {
           paddingTop: { xs: "2rem", sm: "2rem", md: "2rem" },
           paddingBottom: { xs: "2rem", sm: "2rem", md: "2rem" },
         }}
+        ref={ref}
       >
         <Box
           component="img"
@@ -56,7 +84,7 @@ const ProductSecurity = () => {
         >
           <Box
             sx={{
-              width: isMobile ? "unset" : "100%",
+              width: isMobile || isTab ? "unset" : "100%",
               maxWidth: "1400px",
               display: "flex",
               flexDirection: { xs: "column-reverse", md: "row" },
@@ -66,7 +94,10 @@ const ProductSecurity = () => {
               gap: "2rem",
             }}
           >
-            <Box
+            <MotionBox
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              variants={fadeInFromLeft}
               sx={{
                 width: { xs: "100%", md: "calc(55% - 1rem)" },
                 display: "flex",
@@ -108,9 +139,12 @@ const ProductSecurity = () => {
                   }}
                 />
               </Box>
-            </Box>
+            </MotionBox>
 
-            <Box
+            <MotionBox
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              variants={fadeIn}
               sx={{
                 width: { xs: "100%", md: "calc(45% - 1rem)" },
                 display: "flex",
@@ -178,7 +212,7 @@ const ProductSecurity = () => {
                 component="ul"
                 sx={{
                   listStyleType: "disc",
-                  pl: { xs: 4, md: 4 },
+                  pl: { xs: 2, md: 4 },
                   color: "#EAEAEA",
                   fontFamily: "Montserrat",
                   fontSize: { xs: "16px", sm: "16px", md: "18px" },
@@ -199,7 +233,7 @@ const ProductSecurity = () => {
                 <li>Redundant streams with fault tolerance and replay</li>
                 <li>Compliant with enterprise-grade audit & alert standards</li>
               </Box>
-            </Box>
+            </MotionBox>
           </Box>
         </Box>
       </Box>
