@@ -23,8 +23,8 @@ const page = () => {
   return (
     <ThemeProvider theme={theme}>
       <HomeHero />
-      <UnifiedPage />
       <Features />
+      <UnifiedPage />
       <UseCaseSection />
     </ThemeProvider>
   );

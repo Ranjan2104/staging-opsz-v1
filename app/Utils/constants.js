@@ -252,3 +252,60 @@ export const secureRoutes = [
   "/terms-condition",
   "/cookie-policy",
 ];
+// our team data
+export const ourTeamData = [
+  {
+    name: 'Scott Albrecht',
+    designation: 'CEO & Co-Founder',
+    image: '/team1.png',
+    description: 'Scottie leads our vision to revolutionize IT operations management.',
+    linkedinUrl: "",
+    twitterUrl: "",
+    dribbbleUrl: "",
+  },
+  {
+    name: "Niamh Morgan",
+    designation: 'COO',
+    image: '/team2.png',
+    description: 'Scottie leads our vision to revolutionize IT operations management.',
+    linkedinUrl: "",
+    twitterUrl: "",
+    dribbbleUrl: "",
+  },
+  {
+    name: "Lonny Schwartz",
+    designation: 'CMO',
+    image: '/team3.png',
+    description: 'Scottie leads our vision to revolutionize IT operations management.',
+    linkedinUrl: "",
+    twitterUrl: "",
+    dribbbleUrl: "",
+  },
+  {
+    name: "Dayvid Iannaci",
+    designation: 'ECD',
+    image: '/team4.png',
+    description: 'Creative and UX lead with over 30 years of experience.',
+    linkedinUrl: "",
+    twitterUrl: "",
+    dribbbleUrl: "",
+  },
+  {
+    name: 'Shiva BoBiva',
+    designation: 'Title',
+    image: '/team5.png',
+    description: 'Scottie leads our vision to revolutionize IT operations management.',
+    linkedinUrl: "",
+    twitterUrl: "",
+    dribbbleUrl: "",
+  },
+  {
+    name: 'Stealth Dev',
+    designation: 'Title',
+    image: '/team6.png',
+    description: 'He who will not be named - but still kicks ass ipsum non bibendum odio ipsum non bibendum odio',
+    linkedinUrl: "",
+    twitterUrl: "",
+    dribbbleUrl: "",
+  }
+]

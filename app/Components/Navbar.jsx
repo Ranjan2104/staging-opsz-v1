@@ -110,7 +110,7 @@ function Navbar() {
             }}
             onClick={() => (window.location.href = "/chatbot")}
           >
-            Schedule a Briefing
+            Schedule a Demo
           </Button>
         </Box>
 
@@ -178,7 +178,7 @@ function Navbar() {
             }}
             onClick={() => handleCloseNavMenu("/chatbot")}
           >
-            Schedule a Briefing
+            Schedule a Demo
           </Button>
         </Box>
       </Toolbar>

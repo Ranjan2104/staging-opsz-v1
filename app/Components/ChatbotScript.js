@@ -8,6 +8,7 @@ export default function ChatbotScript() {
 
   useEffect(() => {
     const scriptId = "chatbot-initials-script";
+    let timeoutId;
 
     const removeScript = () => {
       const existing = document.getElementById(scriptId);
@@ -32,15 +33,14 @@ export default function ChatbotScript() {
       }
     };
 
-    // Add or remove based on route
-    if (pathname === "/chatbot") {
-      removeScript();
+    if (pathname !== "/chatbot") {
+      timeoutId = setTimeout(addScript, 30000);
     } else {
-      addScript();
+      removeScript();
     }
 
-    // Clean up on unmount or route change
     return () => {
+      clearTimeout(timeoutId);
       removeScript();
     };
   }, [pathname]);
