@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, memo, } from "react";
+import React, { useState, useEffect, useRef, useCallback, memo } from "react";
 import {
   Box,
   Typography,
@@ -14,21 +14,27 @@ import "animate.css";
 const contentItems = [
   {
     title: "Connect Everything, Control Anything.",
-    image: "/unified/DashboardImage.svg",
-    text1: "OpsZ unifies your entire IT ecosystem: on-prem, cloud, hybrid, or legacy, into one intelligent platform. By integrating seamlessly with existing tools, OpsZ eliminates silos, streamlines workflows, and delivers a single source of truth across even the most complex environments.",
-    text2: "By providing a unified view of your operations, OpsZ enables teams to operate faster, smarter, and with greater control. Break down data barriers and unlock insights that were previously hidden in disparate systems."
+    image: "/Unify copy.png",
+    text1:
+      "OpsZ unifies your entire IT ecosystem: on-prem, cloud, hybrid, or legacy, into one intelligent platform. By integrating seamlessly with existing tools, OpsZ eliminates silos, streamlines workflows, and delivers a single source of truth across even the most complex environments.",
+    text2:
+      "By providing a unified view of your operations, OpsZ enables teams to operate faster, smarter, and with greater control. Break down data barriers and unlock insights that were previously hidden in disparate systems.",
   },
   {
     title: "Automate Anything, Orchestrate Everything.",
-    image: "/automate.svg",
-    text1: "OpsZ orchestrates automation across all platforms—cloud, on-prem, legacy, or hybrid—by stitching together your existing tools into a unified control layer. Using intelligent automation, OpsZ coordinates workflows across previously siloed systems.",
-    text2: "Whether you're using Ansible, Terraform, ServiceNow, or custom scripts, OpsZ enhances, coordinates, and scales automation workflows with intelligent logic and seamless integration, all from a single pane of glass."
+    image: "/Automate.png",
+    text1:
+      "OpsZ orchestrates automation across all platforms—cloud, on-prem, legacy, or hybrid—by stitching together your existing tools into a unified control layer. Using intelligent automation, OpsZ coordinates workflows across previously siloed systems.",
+    text2:
+      "Whether you're using Ansible, Terraform, ServiceNow, or custom scripts, OpsZ enhances, coordinates, and scales automation workflows with intelligent logic and seamless integration, all from a single pane of glass.",
   },
   {
     title: "Amplify Growth, Simplify Control.",
-    image: "/unify.svg",
-    text1: "OpsZ enables effortless scale by abstracting complexity and standardizing operations across teams, tools, and environments. As your business grows, OpsZ grows with you, maintaining visibility and control across your expanding ecosystem.",
-    text2: "Whether you're managing hundreds or millions of events, OpsZ adapts to your infrastructure and workflows: no rewrites, no bottlenecks. As your footprint grows, OpsZ ensures visibility, control, and performance scale with you."
+    image: "/Scale.png",
+    text1:
+      "OpsZ enables effortless scale by abstracting complexity and standardizing operations across teams, tools, and environments. As your business grows, OpsZ grows with you, maintaining visibility and control across your expanding ecosystem.",
+    text2:
+      "Whether you're managing hundreds or millions of events, OpsZ adapts to your infrastructure and workflows: no rewrites, no bottlenecks. As your footprint grows, OpsZ ensures visibility, control, and performance scale with you.",
   },
 ];
 
@@ -46,7 +52,11 @@ const titleAnimation = {
 
 const textAnimation = {
   initial: { opacity: 0, y: 15 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", delay: 0.1 } },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut", delay: 0.1 },
+  },
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
@@ -68,32 +78,30 @@ const NavButton = memo(({ btn, idx, isActive, onClick }) => (
       maxWidth: { xs: "100%", sm: "225px" },
       borderRadius: { xs: "8px", sm: "6px" },
       color: isActive ? btn.color : "#545F71",
-      backgroundColor: { 
+      backgroundColor: {
         xs: isActive ? "rgba(30, 30, 40, 0.9)" : "rgba(15, 15, 22, 0.85)",
-        sm: "transparent" 
+        sm: "transparent",
       },
       cursor: "pointer",
       transition: "all 0.3s",
-      boxShadow: isActive 
-        ? `0 0 10px 2px ${btn.color}50` 
-        : "none",
+      boxShadow: isActive ? `0 0 10px 2px ${btn.color}50` : "none",
       textTransform: "none",
       fontFamily: "Montserrat, sans-serif",
       opacity: isActive ? 1 : 0.7,
-      border: { 
-        xs: `1px solid ${isActive ? btn.color : "rgba(84,95,113,0.3)"}`, 
-        sm: "none" 
+      border: {
+        xs: `1px solid ${isActive ? btn.color : "rgba(84,95,113,0.3)"}`,
+        sm: "none",
       },
       "&:hover": {
         backgroundColor: {
           xs: isActive ? "rgba(30, 30, 40, 0.9)" : "rgba(25, 25, 35, 0.85)",
-          sm: `${btn.color}0D`
+          sm: `${btn.color}0D`,
         },
         boxShadow: `0 0 15px 5px ${btn.color}80`,
         opacity: 0.9,
-        border: { 
-          xs: `1px solid ${btn.color}`, 
-          sm: "none" 
+        border: {
+          xs: `1px solid ${btn.color}`,
+          sm: "none",
         },
       },
     }}
@@ -123,11 +131,11 @@ const NavButton = memo(({ btn, idx, isActive, onClick }) => (
     >
       {btn.label}
     </Typography>
-    <ChevronRightIcon 
-      sx={{ 
+    <ChevronRightIcon
+      sx={{
         fontSize: { xs: 20, md: 24 },
         marginLeft: { xs: 1, md: 0 },
-      }} 
+      }}
     />
   </Button>
 ));
@@ -147,24 +155,27 @@ const UnifiedPage = () => {
   const intervalRef = useRef(null);
 
   // Use useCallback to memoize the handleButtonClick function
-  const handleButtonClick = useCallback((idx) => {
-    if (idx === index) return; // Avoid unnecessary updates
+  const handleButtonClick = useCallback(
+    (idx) => {
+      if (idx === index) return; // Avoid unnecessary updates
 
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
 
-    setIndex(idx);
-  }, [index]);
+      setIndex(idx);
+    },
+    [index]
+  );
 
   // Optimized auto-rotation useEffect
   useEffect(() => {
     let interval = null;
-    
+
     if (componentInView && !intervalRef.current) {
       interval = setInterval(() => {
-        setIndex(prevIndex => (prevIndex + 1) % 3);
+        setIndex((prevIndex) => (prevIndex + 1) % 3);
       }, 7000);
       intervalRef.current = interval;
     } else if (!componentInView && intervalRef.current) {
@@ -209,6 +220,7 @@ const UnifiedPage = () => {
           height: "100%",
           objectFit: isMobile ? "fill" : "cover",
           zIndex: 0,
+          filter: "brightness(0.6)"
         }}
       />
 
@@ -291,12 +303,12 @@ const UnifiedPage = () => {
         <Box
           sx={{
             backgroundImage: {
-              xs: "none", 
-              sm: "url(/unified/Baseplate.svg)"
+              xs: "none",
+              sm: "url(/unified/Baseplate.svg)",
             },
-            backgroundColor: { 
-              xs: "rgba(15, 15, 22, 0.7)", 
-              sm: "transparent" 
+            backgroundColor: {
+              xs: "rgba(15, 15, 22, 0.7)",
+              sm: "transparent",
             },
             backgroundSize: {
               sm: "220% 220%",
@@ -314,20 +326,28 @@ const UnifiedPage = () => {
             maxWidth: { xs: "100%", sm: "fit-content" },
             justifyContent: "center",
             alignItems: "center",
-            boxShadow: { 
+            boxShadow: {
               xs: "0 4px 15px rgba(0,0,0,0.3)",
-              sm: "0 4px 20px rgba(0,0,0,0.2)" 
+              sm: "0 4px 20px rgba(0,0,0,0.2)",
             },
-            border: { 
-              xs: "1px solid rgba(120, 120, 150, 0.2)", 
-              sm: "none" 
-            }
+            border: {
+              xs: "1px solid rgba(120, 120, 150, 0.2)",
+              sm: "none",
+            },
           }}
         >
           {/* Buttons with onClick and active status */}
           {buttons.map((btn, idx) => {
             const isActive = idx === index;
-            return <NavButton key={idx} btn={btn} idx={idx} isActive={isActive} onClick={handleButtonClick} />;
+            return (
+              <NavButton
+                key={idx}
+                btn={btn}
+                idx={idx}
+                isActive={isActive}
+                onClick={handleButtonClick}
+              />
+            );
           })}
         </Box>
 
@@ -341,9 +361,15 @@ const UnifiedPage = () => {
             variants={{
               initial: { opacity: 0.9 },
               animate: { opacity: 1 },
-              exit: { opacity: 0.9, transition: { duration: 0.15 } }
+              exit: { opacity: 0.9, transition: { duration: 0.15 } },
             }}
             transition={{ duration: 0.4 }}
+            style={{
+              minHeight: isMobile ? "550px" : "600px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
           >
             {/* Text with animation */}
             <motion.div
@@ -360,39 +386,46 @@ const UnifiedPage = () => {
                   mb: isMobile ? 2 : 4,
                   maxWidth: { xs: "100%", sm: "100%", md: "80%" },
                   gap: { xs: 2, sm: 4 },
-                  color: "#B4B4B4",
+                  color: "white",
                   fontSize: "12px",
                   minHeight: { xs: "180px", sm: "150px" },
                   transition: "min-height 0.3s ease-in-out",
                   position: "relative",
                 }}
               >
-                <Box sx={{ 
-                  width: { xs: "100%", sm: "50%" },
-                  pr: { xs: 0, sm: 2 },
-                  borderRight: { xs: "none", sm: "1px solid rgba(180, 180, 180, 0.1)" },
-                  display: "flex",
-                  alignItems: "flex-start"
-                }}>
+                <Box
+                  sx={{
+                    width: { xs: "100%", sm: "50%" },
+                    pr: { xs: 0, sm: 2 },
+                    borderRight: {
+                      xs: "none",
+                      sm: "1px solid rgba(180, 180, 180, 0.1)",
+                    },
+                    display: "flex",
+                    alignItems: "flex-start",
+                  }}
+                >
                   <Typography
                     sx={{
                       lineHeight: 1.6,
-                      opacity: 0.8
+                      opacity: 0.8,
                     }}
                   >
                     {contentItems[index].text1}
                   </Typography>
                 </Box>
-                <Box sx={{ 
-                  width: { xs: "100%", sm: "50%" },
-                  pl: { xs: 0, sm: 2 },
-                  display: "flex",
-                  alignItems: "flex-start"
-                }}>
+                <Box
+                  sx={{
+                    width: { xs: "100%", sm: "50%" },
+                    pl: { xs: 0, sm: 2 },
+                    display: "flex",
+                    alignItems: "flex-start",
+                  }}
+                >
                   <Typography
                     sx={{
                       lineHeight: 1.6,
-                      opacity: 0.8
+                      opacity: 0.8,
                     }}
                   >
                     {contentItems[index].text2}
@@ -448,7 +481,8 @@ const UnifiedPage = () => {
                   alt="Dashboard"
                   sx={{
                     maxWidth: isMobile ? "100%" : "90%",
-                    height: "auto",
+                    height: { xs: "200px", md: "800px" },
+                    objectFit: "contain",
                   }}
                 />
               </motion.div>

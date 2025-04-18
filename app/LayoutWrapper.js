@@ -7,6 +7,53 @@ import { usePathname } from "next/navigation";
 import { secureRoutes } from "./Utils/constants";
 import CookieBanner from "./Components/CookieBanner";
 import { Toaster } from "react-hot-toast";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+// Create a theme with Montserrat as the default font family
+const theme = createTheme({
+  typography: {
+    fontFamily: '"Montserrat", sans-serif',
+    button: {
+      textTransform: 'none', // Prevents automatic uppercase transformation on buttons
+    },
+    allVariants: {
+      fontFamily: '"Montserrat", sans-serif',
+    }
+  },
+  components: {
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          fontFamily: '"Montserrat", sans-serif',
+        },
+        input: {
+          fontFamily: '"Montserrat", sans-serif',
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontFamily: '"Montserrat", sans-serif',
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontFamily: '"Montserrat", sans-serif',
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontFamily: '"Montserrat", sans-serif',
+        },
+      },
+    },
+  },
+});
 
 export default function LayoutWrapper({ children }) {
   const [isMounted, setIsMounted] = useState(false);
@@ -33,7 +80,7 @@ export default function LayoutWrapper({ children }) {
   const isSecureRoute = secureRoutes.includes(pathname);
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       {showLoader && (
         <div
           style={{
@@ -56,6 +103,7 @@ export default function LayoutWrapper({ children }) {
       <main style={{ opacity: showLoader ? 0.3 : 1 }}>{children}</main>
       {isSecureRoute && <Footer />}
       {isSecureRoute &&
+        pathname !== "/schedule-demo" &&
         pathname !== "/chatbot" &&
         pathname !== "/" &&
         pathname !== "/privacy-policy" &&
@@ -65,6 +113,6 @@ export default function LayoutWrapper({ children }) {
         pathname !== "/company" && <NoformChatbot />}
       <CookieBanner />
       <Toaster position="top-center" reverseOrder={false} />
-    </>
+    </ThemeProvider>
   );
 }

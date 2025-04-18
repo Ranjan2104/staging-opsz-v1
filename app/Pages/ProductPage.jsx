@@ -12,10 +12,10 @@ const ProductPage = () => {
   return (
     <ThemeProvider theme={theme}>
       <Box
-        sx={{
-          background: 'linear-gradient(to right, #2D0052, #7A1FA2, #1A0033)',
-          minHeight: '100vh',
-        }}
+        // sx={{
+        //   background: 'linear-gradient(to right, #2D0052, #7A1FA2, #1A0033)',
+        //   minHeight: '100vh',
+        // }}
       >
         <ProductHero />
       </Box>

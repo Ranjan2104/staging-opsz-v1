@@ -11,7 +11,7 @@ const HomeHero = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const isTab = useMediaQuery("(max-width:900px)");
   const handleRedirect = (url) => {
-    window.location.href = url;
+    router.push(url); 
   };
 
   return (
@@ -225,7 +225,7 @@ const HomeHero = () => {
                 "100%": { backgroundPosition: "0% 50%" },
               },
             }}
-            onClick={() => handleRedirect("/chatbot")}
+            onClick={() => handleRedirect("/schedule-demo")}
           >
             SCHEDULE A DEMO
           </Button>

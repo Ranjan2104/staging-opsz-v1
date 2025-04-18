@@ -14,10 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 const montserrat = Montserrat({
-  weight: ["300", "400", "500", "700"],
+  weight: ["300", "400", "500", "600", "700"], 
   subsets: ["latin"],
   display: "swap",
   fallback: ["Arial", "sans-serif"],
+  variable: "--font-montserrat",
 });
 
 export const metadata = {
@@ -31,9 +32,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${montserrat.variable} ${geistSans.variable} ${geistMono.variable}`}>
       <body
-        className={`${montserrat.variable} ${geistSans.variable} ${geistMono.variable}`}
+        className={montserrat.className}
         id="top"
       >
         <LayoutWrapper>{children}</LayoutWrapper>

@@ -1,11 +1,16 @@
 "use client";
-import React from "react";
-import { Box, Typography, Container, useMediaQuery, Link } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Box,
+  Typography,
+  Container,
+  useMediaQuery,
+  Button,Link
+} from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-// Text comes in from the left
 const fadeInFromLeft = {
   hidden: { opacity: 0, x: -50 },
   visible: {
@@ -15,7 +20,6 @@ const fadeInFromLeft = {
   },
 };
 
-// Cards scale in
 const scaleIn = {
   hidden: { opacity: 0, scale: 0.9 },
   visible: {
@@ -27,21 +31,32 @@ const scaleIn = {
 
 const ProductSaving = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
   const features = [
     {
       icon: "/sub-1.svg",
       title: "Unified Command Center",
-      description: "Real-time, cross-cloud visibility from a single pane of glass.",
+      description:
+        "Real-time, cross-cloud visibility from a single pane of glass.",
+      readmore:
+        "Gain complete situational awareness and take action from a single pane of glass. OpsZ unifies tools, teams, and telemetry—giving enterprise IT leaders centralized visibility across hybrid environments and enabling DevOps teams to act fast, without context-switching. Control more. Chase less.",
     },
     {
       icon: "/sub-2.svg",
       title: "Adaptive Automation",
-      description: "Workflow engine that learns, orchestrates, and responds intelligently.",
+      description:
+        "Workflow engine that learns, orchestrates, and responds intelligently.",
+      readmore:
+        "Go beyond static playbooks. OpsZ uses intelligent agents and real-time signals to dynamically adjust workflows—ideal for DevOps teams looking to reduce manual toil, and enterprises automating across multi-cloud operations. Automate at scale, and evolve as your stack grows.",
     },
     {
       icon: "/sub-3.svg",
       title: "Scalable Ops Intelligence",
-      description: "Agent-based architecture that functions from edge to cloud.",
+      description:
+        "Agent-based architecture that functions from edge to cloud.",
+      readmore:
+        "Turn every action into insight. OpsZ correlates data from across your ecosystem—whether it’s public cloud, private cloud, or bare-metal infrastructure—delivering smarter recommendations and continuous learning. Perfect for hybrid environments where clarity, speed, and scale are critical.",
     },
   ];
 
@@ -50,15 +65,13 @@ const ProductSaving = () => {
     threshold: 0.1,
   });
 
+  const toggleReadMore = (index) => {
+    setExpandedIndex((prev) => (prev === index ? null : index));
+  };
+
   return (
     <Container maxWidth={false} disableGutters>
-      <Box
-        sx={{
-          position: "relative",
-          paddingTop: { xs: "2rem", sm: "2rem", md: "2rem" },
-          paddingBottom: { xs: "2rem", sm: "2rem", md: "4rem" },
-        }}
-      >
+      <Box sx={{ position: "relative", pt: "2rem", pb: { md: "4rem" } }}>
         <Box
           component="img"
           src="/ring.png"
@@ -77,19 +90,8 @@ const ProductSaving = () => {
           }}
         />
 
-        <Box
-          sx={{
-            position: "relative",
-            zIndex: 2,
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "start",
-            alignItems: "flex-start",
-            paddingTop: { xs: "1rem", sm: "1rem", md: "2rem" },
-          }}
-        >
-          <Box sx={{ paddingLeft: isMobile ? "32px" : "64px" }}>
+        <Box sx={{ position: "relative", zIndex: 2, width: "100%" }}>
+          <Box sx={{ pl: isMobile ? "32px" : "64px", pt: { md: "2rem" } }}>
             <motion.div
               variants={fadeInFromLeft}
               initial="hidden"
@@ -99,7 +101,6 @@ const ProductSaving = () => {
               <Typography
                 variant="h1"
                 sx={{
-                  alignSelf: "stretch",
                   background: "linear-gradient(90deg, #FFF 0%, #9747FF 100%)",
                   backgroundClip: "text",
                   WebkitBackgroundClip: "text",
@@ -109,7 +110,6 @@ const ProductSaving = () => {
                   fontWeight: 700,
                   lineHeight: "1.2",
                   textTransform: "capitalize",
-                  overflowWrap: "break-word",
                 }}
               >
                 OpsZ Automates
@@ -148,9 +148,8 @@ const ProductSaving = () => {
               background:
                 "linear-gradient(180deg, rgba(91, 76, 111, 0.44) 0%, rgba(104, 115, 168, 0.44) 129.61%)",
               backdropFilter: "blur(12.55px)",
-              marginLeft: isMobile ? "2.2rem" : "64px",
-              marginRight: isMobile ? "2.2rem" : "64px",
-              marginTop: "32px",
+              mx: isMobile ? "2.2rem" : "64px",
+              mt: "32px",
               maxWidth: isMobile ? "unset" : "90%",
               overflowX: isMobile ? "unset" : "auto",
               width: isMobile ? "unset" : "calc(100% - 11.5rem)",
@@ -202,25 +201,51 @@ const ProductSaving = () => {
                   >
                     {feature.description}
                   </Typography>
-                  <Link href="/chatbot">
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        fontSize: "14px",
-                        fontWeight: 500,
-                        color: "#AAB4FF",
-                        cursor: "pointer",
-                        "&:hover": { textDecoration: "underline" },
-                      }}
-                    >
-                      Learn More
-                      <KeyboardArrowRightIcon
-                        sx={{ fontSize: "16px", ml: 0.5, mt: "1px" }}
-                      />
-                    </Typography>
-                  </Link>
+
+                  <Typography
+                    variant="body2"
+                    onClick={() => toggleReadMore(index)}
+                    sx={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      fontSize: "14px",
+                      fontWeight: 500,
+                      color: "#AAB4FF",
+                      cursor: "pointer",
+                      "&:hover": { textDecoration: "underline" },
+                      mb: 1,
+                    }}
+                  >
+                    Read More
+                    <KeyboardArrowRightIcon
+                      sx={{ fontSize: "16px", ml: 0.5, mt: "1px" }}
+                    />
+                  </Typography>
+
+                  {expandedIndex === index && (
+                    <>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontSize: "13px",
+                          color: "#CCCCCC",
+                          mt: 1,
+                          mb: 2,
+                        }}
+                      >
+                        {feature.readmore}
+                      </Typography>
+                      <Link href="/chatbot">
+                        <Button
+                          variant="outlined"
+                          size="small"
+                          sx={{ color: "#AAB4FF", borderColor: "#AAB4FF" }}
+                        >
+                          Ask Question
+                        </Button>
+                      </Link>
+                    </>
+                  )}
                 </Box>
               </motion.div>
             ))}
