@@ -87,7 +87,7 @@ const HomeProduct = () => {
             top: 0,
             left: 0,
             width: "100%",
-            height: '100%',
+            height: "100%",
             objectFit: "cover",
             objectPosition: "center",
             zIndex: 0,
@@ -273,7 +273,7 @@ const HomeProduct = () => {
                   paddingRight: { xs: 0, sm: 0, md: "1rem" },
                 }}
               >
-                There’s nothing artificial about OpsZ’s intelligence.
+                There’s Nothing Artificial About Our Intelligence.
               </MotionTypography>
 
               <MotionBox
@@ -314,12 +314,11 @@ const HomeProduct = () => {
                     textAlign: { xs: "left", md: "left" },
                   }}
                 >
-                  Built for the demands of modern enterprise, OpsZ delivers
-                  real-time intelligence you can trust. Secure, compliant, and
-                  built to scale, turning live operational signals into
-                  orchestrated action. OpsZ drives efficiency, enforces
-                  consistency, and ensures your infrastructure performs
-                  flawlessly—every time, everywhere.
+                  OpsZ puts contextualized, actionable intelligence at your
+                  fingertips. With real-time logs and embedded workflows, you
+                  get the tools to act immediately—whether you're resolving an
+                  outage or fixing a one-in-a-thousand issue. Real-time
+                  insights. Real actions. Real intelligence.
                 </Typography>
               </MotionBox>
             </MotionBox>
