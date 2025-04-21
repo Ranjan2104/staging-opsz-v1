@@ -3,6 +3,7 @@
 import React, { lazy, Suspense } from "react";
 import ProductPage from "../Pages/ProductPage";
 
+const ProductVerticalCarousel = lazy(() => import("../Components/ProductVerticalCarousel"));
 const Visibility = lazy(() => import("./visibility"));
 const ProductSecurity = lazy(() => import("../Components/ProductSecurity"));
 const ProductSaving = lazy(() => import("../Components/ProductSaving"));
@@ -11,6 +12,10 @@ export default function Product() {
   return (
     <div>
       <ProductPage />
+
+      <Suspense fallback={<div>Loading Carousel...</div>}>
+        <ProductVerticalCarousel />
+      </Suspense>
 
       <Suspense fallback={<div>Loading Security...</div>}>
         <ProductSecurity />
