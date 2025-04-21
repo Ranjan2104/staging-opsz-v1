@@ -193,7 +193,7 @@ const Section2 = () => {
           
           <MotionButton
             component={Link}
-            href="#learn-more-about-us"
+            href="/chatbot"
             variants={fadeInFromRight}
             sx={{
               display: 'flex',

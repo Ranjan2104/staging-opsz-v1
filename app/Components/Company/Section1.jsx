@@ -184,7 +184,7 @@ const Section1 = () => {
             
             <MotionButton
               component={Link}
-              href="#learn-more"
+              href="/chatbot"
               variants={fadeInFromLeft}
               sx={{
                 display: 'flex',
@@ -193,16 +193,15 @@ const Section1 = () => {
                 alignItems: 'center',
                 gap: '8px',
                 border: '1px solid #FFF',
-                background: '#FFF',
-                color: '#000',
+                // background: '#FFF',
+                color: '#FFF',
                 fontFamily: 'Montserrat',
                 fontWeight: 600,
                 textTransform: 'none',
                 width: 'fit-content',
                 borderRadius: '4px',
                 '&:hover': {
-                  background: 'transparent',
-                  color: '#FFF',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)'
                 }
               }}
             >

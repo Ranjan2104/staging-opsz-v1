@@ -108,7 +108,7 @@ function Navbar() {
               textTransform: "none",
               cursor: "pointer",
             }}
-            onClick={() => (window.location.href = "/chatbot")}
+            onClick={() => (window.location.href = "/schedule-demo")}
           >
             Schedule a Demo
           </Button>
@@ -176,7 +176,7 @@ function Navbar() {
               marginTop: "1.5rem",
               cursor: "pointer",
             }}
-            onClick={() => handleCloseNavMenu("/chatbot")}
+            onClick={() => handleCloseNavMenu("/schedule-demo")}
           >
             Schedule a Demo
           </Button>

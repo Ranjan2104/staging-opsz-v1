@@ -86,8 +86,7 @@ export const carouselItems = [
       role: "Lead DBA",
       img: "/mei.png",
       goals: "Ensure database health, handle scale, apply patches",
-      frustrations:
-        "Manual patching, no centralized view, repetitive tasks",
+      frustrations: "Manual patching, no centralized view, repetitive tasks",
     },
     before_OpsZ: {
       title: "Before OpsZ: A Day in the Life",
@@ -96,7 +95,7 @@ export const carouselItems = [
         "Performs manual backup across environments",
         "Starts security patching — tedious, needs approvals",
         "Handles performance issue flagged by DevOps",
-        "Late night maintenance window = burnout"
+        "Late night maintenance window = burnout",
       ],
       image: "/afterImage.png",
     },
@@ -124,17 +123,16 @@ export const carouselItems = [
       role: "Customer Service Manager",
       img: "/sam.jpg",
       goals: "Resolve tickets fast, improve CSAT, track patterns",
-      frustrations:
-        "Repetitive handoffs, no visibility into IT/SRE updates",
+      frustrations: "Repetitive handoffs, no visibility into IT/SRE updates",
     },
-    before_OpsZ: {  
+    before_OpsZ: {
       title: "Before OpsZ: A Day in the Life",
       description: [
         "Escalates incident to IT via email, waits for reply → no resolution yet",
         "No visibility on root cause → escalates again",
         "Customer angry → no clear ETA",
         "Update comes in Slack — too late, resolution unclear",
-        "Manually updates ticket and sends apology email"
+        "Manually updates ticket and sends apology email",
       ],
       image: "/afterImage.png",
     },
@@ -145,7 +143,7 @@ export const carouselItems = [
         "CS sees real-time status + estimated resolution (Automate)",
         "Automated workflows keep customers in the loop (Automate)",
         "No pinging — system updates ticket with RCA (Automate)",
-        "CSAT goes up, tickets down (Scale)"
+        "CSAT goes up, tickets down (Scale)",
       ],
       image: "/afterOpsZ.png",
       descriptionImpact: [
@@ -160,8 +158,10 @@ export const carouselItems = [
       name: "Alex",
       role: "VP of Infrastructure & Operations",
       img: "/alex.png",
-      goals: "Drive efficiency, reduce risk, control cost, align IT with business",
-      frustrations: "No real-time visibility, siloed tools, high MTTR, costly manual ops",
+      goals:
+        "Drive efficiency, reduce risk, control cost, align IT with business",
+      frustrations:
+        "No real-time visibility, siloed tools, high MTTR, costly manual ops",
     },
     before_OpsZ: {
       title: "Before OpsZ: A Day in the Life",
@@ -192,8 +192,7 @@ export const carouselItems = [
         "IT becomes strategic, not just support (Scale)",
       ],
     },
-  }
-  ,
+  },
 ];
 
 // this is for footer links for sub sections
@@ -223,7 +222,11 @@ export const legalLinks = [
     href: "/terms-condition",
     ariaLabel: "View terms of Conditions",
   },
-  { name: "Cookie Policy", href: "/cookie-policy", ariaLabel: "View cookie policy" },
+  {
+    name: "Cookie Policy",
+    href: "/cookie-policy",
+    ariaLabel: "View cookie policy",
+  },
 ];
 
 // this is for navbar links
@@ -256,57 +259,84 @@ export const secureRoutes = [
 // our team data
 export const ourTeamData = [
   {
-    name: 'Scott Albrecht',
-    designation: 'CEO & Co-Founder',
-    image: '/team1.png',
-    description: 'Scottie leads our vision to revolutionize IT operations management.',
+    name: "Scott Albrecht",
+    designation: "CEO & Co-Founder",
+    image: "/team1.png",
+    description:
+      "Scottie leads our vision to revolutionize IT operations management.",
     linkedinUrl: "",
     twitterUrl: "",
     dribbbleUrl: "",
   },
   {
     name: "Niamh Morgan",
-    designation: 'COO',
-    image: '/team2.png',
-    description: 'Scottie leads our vision to revolutionize IT operations management.',
+    designation: "COO",
+    image: "/team2.png",
+    description:
+      "Scottie leads our vision to revolutionize IT operations management.",
     linkedinUrl: "",
     twitterUrl: "",
     dribbbleUrl: "",
   },
   {
     name: "Lonny Schwartz",
-    designation: 'CMO',
-    image: '/team3.png',
-    description: 'Scottie leads our vision to revolutionize IT operations management.',
+    designation: "CMO",
+    image: "/team3.png",
+    description:
+      "Scottie leads our vision to revolutionize IT operations management.",
+    linkedinUrl: "",
+    twitterUrl: "",
+    dribbbleUrl: "",
+  },
+  {
+    name: "Shiva BoBiva",
+    designation: "Title",
+    image: "/team5.png",
+    description:
+      "Scottie leads our vision to revolutionize IT operations management.",
+    linkedinUrl: "",
+    twitterUrl: "",
+    dribbbleUrl: "",
+  },
+  {
+    name: "Stealth Dev",
+    designation: "Title",
+    image: "/team6.png",
+    description:
+      "He who will not be named - but still kicks ass ipsum non bibendum odio ipsum non bibendum odio",
     linkedinUrl: "",
     twitterUrl: "",
     dribbbleUrl: "",
   },
   {
     name: "Dayvid Iannaci",
-    designation: 'ECD',
-    image: '/team4.png',
-    description: 'Creative and UX lead with over 30 years of experience.',
+    designation: "ECD",
+    image: "/team4.png",
+    description: "Creative and UX lead with over 30 years of experience.",
     linkedinUrl: "",
     twitterUrl: "",
     dribbbleUrl: "",
   },
+];
+
+// Unify, Automate, Scale Section Data ~ Home page
+export const contentItems = [
   {
-    name: 'Shiva BoBiva',
-    designation: 'Title',
-    image: '/team5.png',
-    description: 'Scottie leads our vision to revolutionize IT operations management.',
-    linkedinUrl: "",
-    twitterUrl: "",
-    dribbbleUrl: "",
+    title: "Connect Everything, Control Anything.",
+    image: "/Unify copy.png",
+    description:
+      "OpsZ unifies your entire IT ecosystem: on-prem, cloud, hybrid, or legacy, into one intelligent platform. By integrating seamlessly with existing tools, OpsZ eliminates silos, streamlines workflows, and delivers a single source of truth across even the most complex environments.",
   },
   {
-    name: 'Stealth Dev',
-    designation: 'Title',
-    image: '/team6.png',
-    description: 'He who will not be named - but still kicks ass ipsum non bibendum odio ipsum non bibendum odio',
-    linkedinUrl: "",
-    twitterUrl: "",
-    dribbbleUrl: "",
-  }
-]
+    title: "Automate Anything, Orchestrate Everything.",
+    image: "/Automate.png",
+    description:
+      "OpsZ automates the complex, the routine, and everything in between. From multi-cloud deployments to bare metal in your datacenter, we orchestrate workflows across your entire IT ecosystem—without disrupting what already works. Whether it’s incident response, patching, or diagnostics, OpsZ clears the mundane from your plate so your team can focus on what matters: innovating for the future.",
+  },
+  {
+    title: "Amplify Growth, Simplify Control.",
+    image: "/Scale.png",
+    description:
+      "OpsZ helps you scale IT operations without scaling complexity. Whether you manage thousands or hundreds of thousands of systems, we adapt to your environment and your needs—no rip-and-replace required. From edge to cloud, across regions and teams, OpsZ grows with you, making it easy to 100 X your impact without compromising control, speed, or security.",
+  },
+];

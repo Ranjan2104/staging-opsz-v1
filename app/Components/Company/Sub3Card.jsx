@@ -67,7 +67,7 @@ const Sub3Card = ({
         <Typography variant="body2" mt={1}>
           {description}
         </Typography>
-        <Box display="flex" gap={1} mt={2}>
+        {/* <Box display="flex" gap={1} mt={2}>
           <IconButton
             sx={{
               color: "#fff",
@@ -133,7 +133,7 @@ const Sub3Card = ({
               <SportsBasketballIcon />
             </Link>
           </IconButton>
-        </Box>
+        </Box> */}
       </CardContent>
     </Card>
   );

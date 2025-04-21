@@ -10,33 +10,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useInView } from "react-intersection-observer";
 import { motion, AnimatePresence } from "framer-motion";
 import "animate.css";
-
-const contentItems = [
-  {
-    title: "Connect Everything, Control Anything.",
-    image: "/Unify copy.png",
-    text1:
-      "OpsZ unifies your entire IT ecosystem: on-prem, cloud, hybrid, or legacy, into one intelligent platform. By integrating seamlessly with existing tools, OpsZ eliminates silos, streamlines workflows, and delivers a single source of truth across even the most complex environments.",
-    text2:
-      "By providing a unified view of your operations, OpsZ enables teams to operate faster, smarter, and with greater control. Break down data barriers and unlock insights that were previously hidden in disparate systems.",
-  },
-  {
-    title: "Automate Anything, Orchestrate Everything.",
-    image: "/Automate.png",
-    text1:
-      "OpsZ orchestrates automation across all platforms—cloud, on-prem, legacy, or hybrid—by stitching together your existing tools into a unified control layer. Using intelligent automation, OpsZ coordinates workflows across previously siloed systems.",
-    text2:
-      "Whether you're using Ansible, Terraform, ServiceNow, or custom scripts, OpsZ enhances, coordinates, and scales automation workflows with intelligent logic and seamless integration, all from a single pane of glass.",
-  },
-  {
-    title: "Amplify Growth, Simplify Control.",
-    image: "/Scale.png",
-    text1:
-      "OpsZ enables effortless scale by abstracting complexity and standardizing operations across teams, tools, and environments. As your business grows, OpsZ grows with you, maintaining visibility and control across your expanding ecosystem.",
-    text2:
-      "Whether you're managing hundreds or millions of events, OpsZ adapts to your infrastructure and workflows: no rewrites, no bottlenecks. As your footprint grows, OpsZ ensures visibility, control, and performance scale with you.",
-  },
-];
+import { contentItems } from "@/app/Utils/constants";
 
 const imageAnimation = {
   initial: { opacity: 0, y: 30 },
@@ -142,6 +116,7 @@ const NavButton = memo(({ btn, idx, isActive, onClick }) => (
 
 const UnifiedPage = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
+  const isTab = useMediaQuery("(max-width:900px)");
   const [componentRef, componentInView] = useInView({
     triggerOnce: false,
     threshold: 0.3,
@@ -220,7 +195,7 @@ const UnifiedPage = () => {
           height: "100%",
           objectFit: isMobile ? "fill" : "cover",
           zIndex: 0,
-          filter: "brightness(0.6)"
+          filter: isMobile || isTab ? "brightness(0.4)" : "brightness(0.6)",
         }}
       />
 
@@ -368,9 +343,27 @@ const UnifiedPage = () => {
               minHeight: isMobile ? "550px" : "600px",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
+              justifyContent: isMobile || isTab ? "unset" : "space-between",
             }}
           >
+            {/* Title with animation */}
+            <motion.div
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={titleAnimation}
+            >
+              <h2
+                style={{
+                  background: "linear-gradient(90deg, #FFFFFF, #805AD5)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  margin: "0 0 16px 0",
+                }}
+              >
+                {contentItems[index].title}
+              </h2>
+            </motion.div>
             {/* Text with animation */}
             <motion.div
               initial="initial"
@@ -395,7 +388,7 @@ const UnifiedPage = () => {
               >
                 <Box
                   sx={{
-                    width: { xs: "100%", sm: "50%" },
+                    width: { xs: "100%", sm: "80%" },
                     pr: { xs: 0, sm: 2 },
                     borderRight: {
                       xs: "none",
@@ -409,12 +402,13 @@ const UnifiedPage = () => {
                     sx={{
                       lineHeight: 1.6,
                       opacity: 0.8,
+                      color: "white",
                     }}
                   >
-                    {contentItems[index].text1}
+                    {contentItems[index].description}
                   </Typography>
                 </Box>
-                <Box
+                {/* <Box
                   sx={{
                     width: { xs: "100%", sm: "50%" },
                     pl: { xs: 0, sm: 2 },
@@ -430,27 +424,8 @@ const UnifiedPage = () => {
                   >
                     {contentItems[index].text2}
                   </Typography>
-                </Box>
+                </Box> */}
               </Box>
-            </motion.div>
-
-            {/* Title with animation */}
-            <motion.div
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={titleAnimation}
-            >
-              <h2
-                style={{
-                  background: "linear-gradient(90deg, #FFFFFF, #805AD5)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  margin: "0 0 16px 0",
-                }}
-              >
-                {contentItems[index].title}
-              </h2>
             </motion.div>
 
             {/* Image with animation */}
@@ -481,7 +456,7 @@ const UnifiedPage = () => {
                   alt="Dashboard"
                   sx={{
                     maxWidth: isMobile ? "100%" : "90%",
-                    height: { xs: "200px", md: "800px" },
+                    height: { xs: "100%", md: "800px", },
                     objectFit: "contain",
                   }}
                 />

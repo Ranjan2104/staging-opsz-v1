@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Link } from "@mui/material";
 import { motion } from "framer-motion";
 
 const Section4 = () => {
@@ -62,25 +62,28 @@ const Section4 = () => {
         transition={{ duration: 1 }}
         sx={{ position: "relative", zIndex: 1 }}
       >
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "#fff",
-            color: "#333",
-            fontWeight: 500,
-            textTransform: "none",
-            mt: { xs: 4, md: 0 },
-            borderRadius: 2,
-            paddingX: 3,
-            paddingY: 1,
-            boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-            "&:hover": {
-              backgroundColor: "#f5f5f5",
-            },
-          }}
-        >
-          Explore Open Positions
-        </Button>
+        <Link href="https://www.linkedin.com/company/opsz" target="_blank">
+          <Button
+            variant="outlined"
+            sx={{
+              backgroundColor: "black",
+              border: "1px solid #fff",
+              color: "#fff",
+              fontWeight: 500,
+              textTransform: "none",
+              mt: { xs: 4, md: 0 },
+              borderRadius: 2,
+              paddingX: 3,
+              paddingY: 1,
+              boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+              "&:hover": {
+                backgroundColor: "black",
+              },
+            }}
+          >
+            Explore Open Positions
+          </Button>
+        </Link>
       </motion.div>
     </Box>
   );
